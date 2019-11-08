@@ -29,14 +29,37 @@ var showRequestBody = function(req, res, next) {
   next();
 };
 app.use(showRequestBody);
+// Add headers
+app.use(function(req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
+  // Request methods you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+
+  // Request headers you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
+  // Pass to next layer of middleware
+  next();
+});
 //db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //app.use("/", route);
 app.use("/products", product);
-app.use("/users", users);
+app.use("/api/users", users);
 
 app.listen(port, () => {
   console.log("router " + app);
@@ -52,14 +75,14 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
-process.on('uncaughtException', (err) => {
-  console.error('There was an uncaught error', err)
-  process.exit(1) //mandatory (as per the Node docs)
-})
+process.on("uncaughtException", err => {
+  console.error("There was an uncaught error", err);
+  process.exit(1); //mandatory (as per the Node docs)
+});

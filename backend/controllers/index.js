@@ -1,4 +1,6 @@
 const express = require("express");
+const apiError = require("./apiError");
+
 const router = express.Router();
 
 const controllerHandler = (promise, params) => async (req, res, next) => {
@@ -14,13 +16,17 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
     return res.json(result);
   } catch (error) {
     console.log("kiran", error);
-    res.status(error.statusCode || 500);
-    res.write(`${error.message}`);
+    if (error instanceof apiError) {
+      return res.status(error.status).json({ error });
+    }
+    res.status(500);
+
+    /*  res.write(`${error.message}`); 
     console.log({
       message: error.message,
       stack: error.stackTrace,
       code: error.statusCode || 500
-    });
+    });*/
     return res.end();
   }
 };

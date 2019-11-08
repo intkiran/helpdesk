@@ -4,7 +4,7 @@ path = require("path");
 const express = require("express");
 
 // Build the connection string
-var dbURI = "mongodb://localhost:27017/products";
+var dbURI = "mongodb://localhost:27017/helpdesk";
 
 // Create the database connection
 //see: http://stackoverflow.com/a/26164828

@@ -6,6 +6,7 @@ const getUser = async username => {
 };
 const loginUser = async req => {
   const response = await UserService.loginUser(req);
+
   return response;
 };
 const logout = async (req, res) => {

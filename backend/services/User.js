@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const apiError = require("../controllers/apiError");
+
 const getUser = async id => {
   const user = await User.findOne({ id });
   return user;
@@ -14,8 +16,8 @@ const loginUser = async user => {
   const newUser = await User.findOne({ username });
   if (!newUser || !newUser.authenticate(password)) {
     //this.throwError(401,'Please verify your credentials.')
-    const err = new Error("Please verify your credentials.");
-    err.status = 401;
+    const err = new apiError("Please verify your credentials.",500);
+
     throw err;
   }
 
@@ -28,7 +30,8 @@ const addUser = async user => {
     lastName: user.lastName,
     email: user.email,
     username: user.username,
-    password: user.password
+    password: user.password,
+    role: user.role
   });
   let addedUser = await newUser.save();
   return addedUser;
