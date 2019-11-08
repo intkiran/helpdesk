@@ -17,11 +17,11 @@ const authStart = (state, action) => {
 
 const setAuthFromCache = (state, action) => {
   let idToken = localStorage.getItem("token");
-  let userId = localStorage.getItem("userId");
+  let userObj = localStorage.getItem("user");
   return {
     ...state,
     token: idToken,
-    userId: userId,
+    user: userObj,
     error: null,
     loading: false
   };
@@ -29,11 +29,11 @@ const setAuthFromCache = (state, action) => {
 
 const authSuccess = (state, action) => {
   localStorage.setItem("token", action.idToken);
-  localStorage.setItem("userId", action.userId);
+  localStorage.setItem("user", action.user);
   return {
     ...state,
     token: action.idToken,
-    userId: action.userId,
+    user: action.user,
     error: null,
     loading: false
   };
@@ -47,7 +47,7 @@ const authFail = (state, action) => {
 
 const authLogout = state => {
   localStorage.removeItem("token");
-  return { ...state, token: null, userId: null };
+  return { ...state, token: null, user: null };
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {

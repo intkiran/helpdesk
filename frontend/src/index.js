@@ -11,6 +11,7 @@ import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { setupInterceptors } from "./services/axiosInstance";
+import Spinner from "./components/spinner";
 
 import * as serviceWorker from "./serviceWorker";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -20,13 +21,12 @@ setupInterceptors(store, persistor);
 
 const app = (
   <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <BrowserRouter forceRefresh={false}>
+    <PersistGate loading={<Spinner />} persistor={persistor}>
+      <BrowserRouter forceRefresh={true}>
         <App />
       </BrowserRouter>
     </PersistGate>
   </Provider>
 );
-ReactDOM.render(app, document.getElementById("root"));
 
-serviceWorker.unregister();
+ReactDOM.render(app, document.getElementById("root"));

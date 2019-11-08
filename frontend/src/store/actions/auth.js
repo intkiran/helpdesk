@@ -43,9 +43,7 @@ export const auth = (email, password) => {
     UserService.login(payload)
       .then(response => {
         console.log("Actions auth login success", response);
-        dispatch(
-          authSuccess(response.headers.authorization, response.data.localId)
-        );
+        dispatch(authSuccess(response.data.token, response.data));
       })
       .catch(error => {
         console.log("Actions auth login error", error);

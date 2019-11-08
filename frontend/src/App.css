@@ -1,22 +1,19 @@
-.App {
+body,
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+@keyframes spinner-animation {
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -1,0 +1,45 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.header nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+nav a {
+  flex: 1;
+  display: inline-block;
+  padding: 10px;
+  color: aqua;
+  background: #333;
+  transition: all 0.3s;
+}
+
+nav a:hover {
+  text-decoration: none;
+  color: #ffc107;
+}
+
+.footer {
+  padding: 20px 0;
+  background: #333;
+}
+
+.footer img {
+  height: 50px;
+  animation: rotating 3s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

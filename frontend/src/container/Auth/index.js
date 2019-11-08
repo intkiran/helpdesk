@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Spinner from "../../components/spinner";
 
 import {
   Button,
@@ -53,7 +54,7 @@ class Auth extends Component {
     const { username, password, submitted, error } = this.state;
     let spinnerIcon = null;
     if (this.props.loading) {
-      spinnerIcon = "";
+      spinnerIcon = <Spinner />;
     }
 
     let errorMessage = null;
@@ -168,11 +169,13 @@ class Auth extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {
+  const props = {
     loading: state.auth.loading,
     error: state.auth.error,
     isAuthenticated: state.auth.token !== null
   };
+  console.log("kiran auth mapstateprops", props);
+  return props;
 };
 
 const mapDispatchToProps = dispatch => {

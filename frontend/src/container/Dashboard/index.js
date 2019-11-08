@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import { withRouter } from "react-router-dom";
 
 class Dashboard extends Component {
   state = {
+    uploadedFiles: "kiran",
     error: ""
   };
 
   constructor(props) {
     super(props);
-
-    this.setState({ error: "" });
   }
 
   componentDidUpdate() {
     if (!this.props.loading) {
     }
+    this.setState({ uploadedFiles: "kiran" });
   }
 
   // TODO: remove event listeners
@@ -35,18 +36,20 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
+  const props = {
     isAuthenticated: state.auth.token !== null,
-    loading: state.uploadFile.loading,
     error: state.error
   };
+  console.log("kiran dashboard mapstateprops", props);
+  return props;
 };
 
 const mapDispatchToProps = dispatch => {
   return {};
 };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Dashboard)
+);
