@@ -18,6 +18,9 @@ import * as actions from "./store/actions";
 import { connect } from "react-redux";
 import Main from "./components/Main";
 import UserContainer from "./container/User/UserContainer";
+import Logout from "./container/Auth/Logout";
+import TicketListContainer from "./container/Ticket/TicketListContainer";
+import TicketContainer from "./container/Ticket/TicketContainer";
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +53,10 @@ class App extends Component {
           <Route path="/users" component={UserListContainer} />
           <Route exact path="/user" component={UserContainer} />
           <Route exact path="/user/:id" component={UserContainer} />
+          <Route path="/tickets" component={TicketListContainer} />
+          <Route exact path="/ticket" component={TicketContainer} />
+          <Route exact path="/ticket/:id" component={TicketContainer} />
+          <Route exact path="/logout" component={Logout} />
 
           <Route path="/home" component={Home} />
         </Switch>

@@ -3,6 +3,7 @@ import { axiosInstance as axios } from "../../services/axiosInstance";
 import { UserService } from "../../services/";
 import { history } from "./../../utils/history";
 import setAuthorizationToken from "./../../utils/setAuthorizationToken";
+import toastr from "toastr";
 
 let firstTry = true;
 export const authStart = () => {
@@ -27,6 +28,8 @@ export const authFail = error => {
 };
 
 export const logout = () => {
+  toastr.success("User Successfully logout");
+
   window.location.reload();
   return {
     type: actionTypes.AUTH_LOGOUT
@@ -47,6 +50,7 @@ export const auth = (email, password) => {
         console.log("Actions auth login success", response);
         dispatch(authSuccess(response.data.token, response.data));
         setAuthorizationToken(response.data.token);
+        toastr.success("User Successfully logged");
 
         history.push("/home");
       })

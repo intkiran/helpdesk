@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import { axiosInstance as axios } from "../../services/axiosInstance";
+import toastr from "toastr";
 
 export const fetchUsersStart = () => {
   return {
@@ -22,7 +23,6 @@ export const fetchUsersFail = error => {
 };
 
 export const fetchUsers = () => {
-  const token = localStorage.getItem("token");
   return dispatch => {
     dispatch(fetchUsersStart());
     axios
@@ -36,7 +36,43 @@ export const fetchUsers = () => {
       });
   };
 };
+export const fetchUserStart = () => {
+  return {
+    type: actionTypes.FETCH_USER_START
+  };
+};
 
+export const fetchUserSuccess = data => {
+  return {
+    type: actionTypes.FETCH_USER_SUCCESS,
+    data: data
+  };
+};
+
+export const fetchUserFail = error => {
+  return {
+    type: actionTypes.FETCH_USER_FAIL,
+    error: error
+  };
+};
+
+export const fetchUser = id => {
+  return dispatch => {
+    dispatch(fetchUserStart(id));
+    /*   dispatch(fetchUserSuccess());
+    dispatch(fetchUserFail()); */
+
+    axios
+      .get("/api/users/" + id)
+      .then(response => {
+        console.log("Kiran Users api list call response", response);
+        dispatch(fetchUserSuccess(response.data));
+      })
+      .catch(err => {
+        dispatch(fetchUserFail(err));
+      });
+  };
+};
 export const createUserStart = () => {
   return {
     type: actionTypes.CREATE_USER_START
@@ -64,12 +100,82 @@ export const createUser = (data, sortBy) => {
       .post("/api/users/create", data)
       .then(response => {
         dispatch(createUserSuccess(response.data));
+        toastr.success("User Successfully created");
       })
       .catch(err => {
         dispatch(createUserFail(err));
       });
   };
 };
+export const updateUserStart = () => {
+  return {
+    type: actionTypes.UPDATE_USER_START
+  };
+};
+
+export const updateUserSuccess = data => {
+  return {
+    type: actionTypes.UPDATE_USER_SUCCESS,
+    data: data
+  };
+};
+
+export const updateUserFail = error => {
+  return {
+    type: actionTypes.UPDATE_USER_FAIL,
+    error: error
+  };
+};
+
+export const updateUser = (data, sortBy) => {
+  return dispatch => {
+    dispatch(updateUserStart());
+    axios
+      .post("/api/users/update", data)
+      .then(response => {
+        dispatch(updateUserSuccess(response.data));
+        toastr.success("User Successfully updated");
+      })
+      .catch(err => {
+        dispatch(updateUserFail(err));
+      });
+  };
+};
+export const deleteUserStart = () => {
+  return {
+    type: actionTypes.DELETE_USER_START
+  };
+};
+
+export const deleteUserSuccess = data => {
+  return {
+    type: actionTypes.DELETE_USER_SUCCESS,
+    data: data
+  };
+};
+
+export const deleteUserFail = error => {
+  return {
+    type: actionTypes.DELETE_USER_FAIL,
+    error: error
+  };
+};
+
+export const deleteUser = id => {
+  return dispatch => {
+    dispatch(deleteUserStart());
+    axios
+      .delete("/api/users/delete/" + id)
+      .then(response => {
+        dispatch(deleteUserSuccess(response.data));
+        toastr.success("User Successfully deleted");
+      })
+      .catch(err => {
+        dispatch(deleteUserFail(err));
+      });
+  };
+};
+
 export const newUserStart = () => {
   return {
     type: actionTypes.NEW_USER_START

@@ -4,10 +4,10 @@ var database = require("./database.js");
 let middleware = require("./config/middleware");
 
 const router = express.Router();
-//const route = require("./routes/route");
-const product = require("./routes/product.route"); // Imports routes for the products
+
 const users = require("./routes/user.route"); // Imports routes for the users
 const auth = require("./routes/auth.route"); // Imports routes for the auth
+const tickets = require("./routes/ticket.route"); // Imports routes for the users
 
 let port = 2000;
 const app = express();
@@ -60,8 +60,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //app.use("/", route);
-app.use("/products", product);
 app.use("/api/users", middleware.checkToken, users);
+app.use("/api/tickets", middleware.checkToken, tickets);
+
 app.use("/api/auth", auth);
 
 app.listen(port, () => {

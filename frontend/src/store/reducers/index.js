@@ -5,10 +5,12 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/es/storage";
 import AuthReducer from "./auth";
 import UserReducer from "./user";
+import TicketReducer from "./ticket";
 
 const appReducer = combineReducers({
   auth: AuthReducer,
-  users: UserReducer
+  users: UserReducer,
+  tickets: TicketReducer
 });
 
 const rootReducer = (state, action) => {

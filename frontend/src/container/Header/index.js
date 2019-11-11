@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import { Link, NavLink, withRouter } from "react-router-dom";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 
 class Header extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.logout = this.logout.bind(this);
+  }
+
   logout = event => {
     this.props.logout();
   };
@@ -13,6 +18,11 @@ class Header extends Component {
     /*   if (this.props.isAuthenticated) {
       this.props.history.push("/home");
     } */
+  }
+  logout(event) {
+    event.preventDefault();
+    this.props.actions.logout();
+    this.props.history.push("/auth");
   }
 
   render() {
@@ -26,12 +36,12 @@ class Header extends Component {
     const userLinks = (
       <>
         <Nav className="mr-auto">
-          <Nav.Link href="users">Users</Nav.Link>
-          <Nav.Link href="tickets">Tickets</Nav.Link>
+          <Nav.Link href="/users">Users</Nav.Link>
+          <Nav.Link href="/tickets">Tickets</Nav.Link>
         </Nav>
         <Nav className="nav navbar-nav navbar-right">
-          <Nav.Link href="logout">Logout</Nav.Link>
-          <Nav.Link href="myaccount">Myaccount</Nav.Link>
+          <Nav.Link href="/logout">Logout</Nav.Link>
+          <Nav.Link href="/myaccount">Myaccount</Nav.Link>
         </Nav>
       </>
     );

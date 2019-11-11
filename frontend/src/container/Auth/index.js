@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../../components/spinner";
 
@@ -50,21 +49,6 @@ class Auth extends Component {
     if (!(username && password)) return;
 
     this.props.onAuth(username, password);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("kiran auth component receive props", nextProps);
-    console.log("kiran auth component receive ", this.props);
-
-    /* if (nextProps.isAuthenticated) {
-      this.getToHome();
-    }
-    if (
-      ["/auth", "/sign-up"].indexOf(this.props.location.pathname) !== -1 &&
-      this.props.isAuthenticated
-    ) {
-      this.props.history.push("/main");
-    } */
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isAuthenticated) {

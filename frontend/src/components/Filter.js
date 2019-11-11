@@ -1,11 +1,8 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default class FilterForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   onAdd() {
-    this.props.OnAdd();
+    this.props.history.push(`/user`);
   }
 
   handleFilterChange(e) {
@@ -25,13 +22,9 @@ export default class FilterForm extends React.Component {
           />
         </div>
         <div className="col-md-2">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={this.onAdd.bind(this)}
-          >
+          <Link to="/user" className="btn btn-primary">
             <span className="fa fa-plus" aria-hidden="true"></span>
-          </button>
+          </Link>
         </div>
       </form>
     );

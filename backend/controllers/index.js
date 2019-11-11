@@ -21,12 +21,6 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
     }
     res.status(500);
 
-    /*  res.write(`${error.message}`); 
-    console.log({
-      message: error.message,
-      stack: error.stackTrace,
-      code: error.statusCode || 500
-    });*/
     return res.end();
   }
 };

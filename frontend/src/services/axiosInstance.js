@@ -39,8 +39,6 @@ export const setupInterceptors = (store, persistor) => {
       return response;
     },
     error => {
-      var errorObj = JSON.parse(JSON.stringify(error));
-
       console.log("Erro axios instancer", error);
       if (errorsTypes.AUTHENTICATIONERROR === error.status) {
         console.error("unauthenticated user");

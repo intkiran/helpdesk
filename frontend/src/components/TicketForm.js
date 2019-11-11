@@ -1,19 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-class UserForm extends React.Component {
+class TicketForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
     this.state = {
-      username: "",
-      firstName: "",
-      lastName: "",
+      fullName: "",
       email: "",
-      password: "",
-      roles: ""
+      category: "",
+      priority: "",
+      status: "",
+      subject: "",
+      comments: "",
+      message: "",
+      CrtdOn: "",
+      ModOn: ""
     };
   }
 
@@ -25,28 +29,28 @@ class UserForm extends React.Component {
     this.setState({
       [name]: value
     });
-    console.log("user form ", this.state);
+    console.log("ticket form ", this.state);
   }
   handleSubmit(event) {
     event.preventDefault();
-    console.log("user form submit ", this.state);
+    console.log("ticket form submit ", this.state);
 
     this.props.onSave(this.state);
   }
   componentDidMount() {
-    console.log("kiran user form", this.props.user);
-    this.setState(this.props.user);
-    console.log("kiran user form1", this.state);
+    console.log("kiran ticket form", this.props.ticket);
+    this.setState(this.props.ticket);
+    console.log("kiran ticket form1", this.state);
   }
   UNSAFE_componentWillReceiveProps(ble) {
-    this.setState(ble.user);
+    this.setState(ble.ticket);
   }
 
-  handleRolesChange = roles => {
-    let value = roles.target.value;
-    let name = roles.target.name;
+  handleRolesChange = priority => {
+    let value = priority.target.value;
+    let name = priority.target.name;
 
-    console.log("handleRolesChange", roles.target.name);
+    console.log("handleRolesChange", priority.target.name);
     this.setState(
       prevState => {
         return {
@@ -62,38 +66,38 @@ class UserForm extends React.Component {
     return (
       <form>
         <div className="form-group">
-          <label htmlFor="username">User Name</label>
+          <label htmlFor="category">Category</label>
           <input
             type="text"
             className="form-control"
-            id="username"
-            name="username"
-            placeholder="Username"
-            value={this.state.username}
+            id="category"
+            name="category"
+            placeholder="category"
+            value={this.state.category}
             onChange={this.handleInputChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="subject">Subject</label>
           <input
             type="text"
             className="form-control"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-            value={this.state.firstName}
+            id="subject"
+            name="subject"
+            placeholder="Subject"
+            value={this.state.subject}
             onChange={this.handleInputChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="comment">comment</label>
           <input
             type="text"
             className="form-control"
-            id="lastName"
-            name="lastName"
-            placeholder="First Name"
-            value={this.state.lastName}
+            id="comment"
+            name="comment"
+            placeholder="comment"
+            value={this.state.comment}
             onChange={this.handleInputChange}
           />
         </div>
@@ -110,30 +114,30 @@ class UserForm extends React.Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="fullName">fullName</label>
           <input
             type="text"
             className="form-control"
-            id="password"
-            name="password"
-            placeholder="Password"
-            defaultValue={this.state.password}
+            id="fullName"
+            name="fullName"
+            placeholder="fullName"
+            defaultValue={this.state.fullName}
             onChange={this.handleInputChange}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="roles">Role</label>
+          <label htmlFor="roles">priority</label>
           <select
             className="form-control"
             onChange={this.handleRolesChange}
-            name="roles"
-            id="roles"
+            name="priority"
+            id="priority"
           >
-            <option id="standard">Standard</option>
-            <option id="admin">Admin</option>
+            <option id="low">Low</option>
+            <option id="medium">Medium</option>
+            <option id="high">High</option>
           </select>
-          only Values standard or admin
         </div>
         <button
           type="button"
@@ -150,8 +154,8 @@ class UserForm extends React.Component {
   }
 }
 
-UserForm.propTypes = {
+TicketForm.propTypes = {
   onSave: PropTypes.func.isRequired,
-  user: PropTypes.object
+  ticket: PropTypes.object
 };
-export default UserForm;
+export default TicketForm;

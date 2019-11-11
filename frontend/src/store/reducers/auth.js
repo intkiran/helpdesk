@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/actionTypes";
-import lodash from "lodash";
 
 const initialState = {
   token: null,
@@ -58,8 +57,10 @@ const authFail = (state, action) => {
   return { ...state, error: action.error.message, loading: false, token: null };
 };
 
-const authLogout = state => {
+const logout = state => {
   localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
   return { ...state, token: null, user: null };
 };
 const authReducer = (state = initialState, action) => {
@@ -71,7 +72,7 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
-      return authLogout(state, action);
+      return logout(state, action);
     case actionTypes.SET_AUTHENTICATION_FROM_CACHE:
       return setAuthFromCache(state, action);
     default:

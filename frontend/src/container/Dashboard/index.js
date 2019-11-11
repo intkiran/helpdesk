@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 import { withRouter } from "react-router-dom";
-import UserListContainer from "./../User/UserListContainer";
-import Header from "./../../container/Header";
+
 class Dashboard extends Component {
   state = {
     uploadedFiles: "kiran",
     error: ""
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   componentDidUpdate() {
     if (!this.props.loading) {
