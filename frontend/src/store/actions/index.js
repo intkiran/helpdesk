@@ -6,3 +6,4 @@ export {
   authFail,
   isLoggedIn
 } from "./auth";
+export { fetchUsers, createUser, newUser } from "./user";

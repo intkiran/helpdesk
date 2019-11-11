@@ -16,14 +16,14 @@ export const setupInterceptors = (store, persistor) => {
       // Do something before request is sent
       //If the header does not contain the token and the url not public, redirect to login
       //var accessToken = getAccessTokenFromCookies();
-      let accessToken = localStorage.getItem("token");
+      let token = localStorage.getItem("token");
       console.log("configuration", config);
+      console.log("Kiran ", token);
+
       //if token is found add it to the header
-      if (accessToken) {
+      if (token) {
         if (config.method !== "OPTIONS") {
-          config.headers = {
-            Authorization: accessToken
-          };
+          config.headers.Authorization = `Bearer ${token}`;
         }
       }
       return config;

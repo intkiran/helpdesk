@@ -1,16 +1,19 @@
 // combine all reducers
 
 import { combineReducers } from "redux";
-import AuthReducer from "./auth";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/es/storage";
+import AuthReducer from "./auth";
+import UserReducer from "./user";
 
 const appReducer = combineReducers({
-  auth: AuthReducer
+  auth: AuthReducer,
+  users: UserReducer
 });
 
 const rootReducer = (state, action) => {
-  return appReducer(state, action);
+  const re = appReducer(state, action);
+  return re;
 };
 
 const persistConfig = {

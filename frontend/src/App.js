@@ -1,55 +1,70 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import {
+  Redirect,
+  Route,
+  Switch,
+  BrowserRouter as Router,
+  withRouter
+} from "react-router-dom";
 import Auth from "./container/Auth";
 import Home from "./container/Dashboard";
 import Header from "./container/Header";
 import Footer from "./components/footer";
+import UserListContainer from "./container/User/UserListContainer";
 
 import * as actions from "./store/actions";
 import { connect } from "react-redux";
+import Main from "./components/Main";
+import UserContainer from "./container/User/UserContainer";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    if (props.isAuthenticated) {
+    /* if (props.isAuthenticated) {
       props.isLoggedIn();
-    }
+    } */
   }
   componentDidUpdate(prevProps) {
-    if (
+    /*  if (
       this.props.location !== prevProps.location &&
       this.props.isAuthenticated
     ) {
       this.props.isLoggedIn();
-    }
+    } */
   }
   render() {
+    let accessToken = localStorage.getItem("token");
+    console.log("kiran accessToken app.js ", accessToken);
     let routes = (
       <Switch>
-        <Redirect exact from={"/"} to={"/auth"} />
         <Route path="/auth" component={Auth} />
+        <Redirect to="/auth" />
       </Switch>
     );
-
     if (this.props.isAuthenticated) {
-      console.log("kiran routes authenticated", this.props);
-
       routes = (
         <Switch>
-          <Route path="/auth" exact component={Home} />
-          <Redirect to="/" />
+          <Route path="/" exact component={Main} />
+          <Route path="/users" component={UserListContainer} />
+          <Route exact path="/user" component={UserContainer} />
+          <Route exact path="/user/:id" component={UserContainer} />
+
+          <Route path="/home" component={Home} />
         </Switch>
       );
     }
+
     console.log("kiran routes", routes);
     return (
-      <div className="container">
-        <Header></Header>
-        <div className="main">{routes}</div>
-        <Footer></Footer>
-      </div>
+      <>
+        <Header />
+        <div className="container">
+          {routes}
+          <Footer />
+        </div>
+      </>
     );
   }
 }

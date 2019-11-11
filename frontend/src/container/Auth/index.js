@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../../components/spinner";
 
@@ -17,6 +17,7 @@ import {
   InputGroupText,
   Row,
   FormFeedback,
+  Jumbotron,
   Alert
 } from "reactstrap";
 import * as actions from "../../store/actions/index";
@@ -50,8 +51,40 @@ class Auth extends Component {
 
     this.props.onAuth(username, password);
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("kiran auth component receive props", nextProps);
+    console.log("kiran auth component receive ", this.props);
+
+    /* if (nextProps.isAuthenticated) {
+      this.getToHome();
+    }
+    if (
+      ["/auth", "/sign-up"].indexOf(this.props.location.pathname) !== -1 &&
+      this.props.isAuthenticated
+    ) {
+      this.props.history.push("/main");
+    } */
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isAuthenticated) {
+      this.props.history.push("/home");
+    } else if (nextProps.error) {
+      //toastr.error(nextProps.auth.error);
+    }
+  }
+
+  getToHome() {
+    // history.push("/home");
+    //this.props.history.push("/home");
+  }
   render() {
-    const { username, password, submitted, error } = this.state;
+    console.log("Kiran AuthComponent", this.props.isAuthenticated);
+    /*     let { from } = this.props.location.state || { from: { pathname: "/home" } };
+    console.log("kiran auth component from", from);*/
+
+    /*     if (this.props.isAuthenticated) return <Redirect to={"/home"} />;
+     */ const { username, password, submitted, error } = this.state;
     let spinnerIcon = null;
     if (this.props.loading) {
       spinnerIcon = <Spinner />;
@@ -61,13 +94,13 @@ class Auth extends Component {
 
     if (this.props.error) {
       errorMessage = (
-        <Alert color="danger" isOpen="true" fade={false}>
+        <Alert color="danger" isOpen={true} fade={false}>
           {this.props.error}
         </Alert>
       );
     }
     return (
-      <div className="app flex-row align-items-center">
+      <Jumbotron>
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
@@ -76,7 +109,7 @@ class Auth extends Component {
                   <CardBody>
                     <Form onSubmit={this.handleSubmit}>
                       {spinnerIcon}
-                      <h1>HelpDesk Login</h1>
+                      <h3>Login</h3>
 
                       <p className="text-muted">Sign In to your account</p>
                       <InputGroup className="mb-3">
@@ -135,36 +168,11 @@ class Auth extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                {/*<Card
-                    className="text-white bg-primary py-5 d-md-down-none"
-                    style={{ width: "44%" }}
-                  >
-                    <CardBody className="text-center">
-                      <div>
-                        <h2>Sign up</h2>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua.
-                        </p>
-                        <Link to="/register">
-                          <Button
-                            color="primary"
-                            className="mt-3"
-                            active
-                            tabIndex={-1}
-                          >
-                            Register Now!
-                          </Button>
-                        </Link>
-                      </div>
-                    </CardBody>
-                 </Card>*/}
               </CardGroup>
             </Col>
           </Row>
         </Container>
-      </div>
+      </Jumbotron>
     );
   }
 }

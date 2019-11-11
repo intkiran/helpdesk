@@ -19,7 +19,7 @@ async function login(payload) {
     }); */
 
   try {
-    const response = await axios.post("/api/users/login", payload);
+    const response = await axios.post("/api/auth/login", payload);
     console.log("user service login success", response);
     return response;
   } catch (error) {

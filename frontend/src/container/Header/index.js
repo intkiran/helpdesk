@@ -2,22 +2,72 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { Link, NavLink, withRouter } from "react-router-dom";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
 
 class Header extends Component {
   logout = event => {
     this.props.logout();
   };
+  componentDidMount() {
+    console.log("kiran header didmount", this.props.isAuthenticated);
+    /*   if (this.props.isAuthenticated) {
+      this.props.history.push("/home");
+    } */
+  }
 
   render() {
+    const currentUser = this.props.currentUser ? this.props.currentUser : null;
+    console.log("kiran auth current user", currentUser);
+    let link;
+    let role = null;
+    if (currentUser) role = currentUser.roles;
+
+    console.log("kiran auth role", role);
+    const userLinks = (
+      <>
+        <Nav className="mr-auto">
+          <Nav.Link href="users">Users</Nav.Link>
+          <Nav.Link href="tickets">Tickets</Nav.Link>
+        </Nav>
+        <Nav className="nav navbar-nav navbar-right">
+          <Nav.Link href="logout">Logout</Nav.Link>
+          <Nav.Link href="myaccount">Myaccount</Nav.Link>
+        </Nav>
+      </>
+    );
+    const adminLinks = (
+      <>
+        <Nav className="mr-auto">
+          <Nav.Link href="users">Users</Nav.Link>
+          <Nav.Link href="tickets">Tickets</Nav.Link>
+        </Nav>
+        <Nav className="nav navbar-nav navbar-right">
+          <Nav.Link href="logout">Logout</Nav.Link>
+          <Nav.Link href="myaccount">Myaccount</Nav.Link>
+        </Nav>
+      </>
+    );
+    const guestLinks = (
+      <Nav className="nav navbar-nav navbar-right">
+        <Nav.Link href="auth">Login</Nav.Link>
+        <Nav.Link href="sighup">Signup</Nav.Link>
+      </Nav>
+    );
+
+    if (!this.props.isAuthenticated) {
+      link = guestLinks;
+    } else if (role === "admin") {
+      link = adminLinks;
+    } else if (role === "standard") {
+      link = userLinks;
+    }
+
     return (
-      <div className="header">
-        <nav>
-          <Link to="/">Home page</Link>
-          <Link to="/about">About</Link>
-          <Link to="/about">Logout</Link>
-        </nav>
-        <div onClick={this.logout} title="Logout"></div>
-      </div>
+      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+        <Navbar.Brand href="#home">Heldesk</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">{link}</Navbar.Collapse>
+      </Navbar>
     );
   }
 }
@@ -29,9 +79,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null
+  const result = {
+    isAuthenticated: state.auth.token !== null,
+    currentUser: state.auth.user,
+    auth: state.auth
   };
+  console.log("kiran header mapstateprops", result);
+  return result;
 };
 
 export default withRouter(

@@ -1,8 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
+import lodash from "lodash";
 
 const initialState = {
-  token: localStorage.getItem("token"),
-  userId: null,
+  token: null,
+  user: null,
   error: null,
   loading: false
 };
@@ -18,25 +19,37 @@ const authStart = (state, action) => {
 const setAuthFromCache = (state, action) => {
   let idToken = localStorage.getItem("token");
   let userObj = localStorage.getItem("user");
+  console.log("kiran setAuthFromCache", JSON.parse(userObj));
   return {
     ...state,
     token: idToken,
-    user: userObj,
+    user: JSON.parse(userObj),
     error: null,
     loading: false
   };
 };
 
 const authSuccess = (state, action) => {
-  localStorage.setItem("token", action.idToken);
-  localStorage.setItem("user", action.user);
-  return {
-    ...state,
-    token: action.idToken,
+  console.log("auth reducer success", state, action);
+  localStorage.setItem("token", action.token);
+  localStorage.setItem("user", JSON.stringify(action.user.user));
+  /* const result = Object.assign({}, state, {
+    token: action.token,
     user: action.user,
     error: null,
     loading: false
+  }); */
+
+  const result = {
+    ...state,
+    token: action.token,
+    user: action.user.user,
+    error: null,
+    loading: false
   };
+  console.log("auth reducer success result", result);
+
+  return result;
 };
 
 const authFail = (state, action) => {
@@ -49,7 +62,7 @@ const authLogout = state => {
   localStorage.removeItem("token");
   return { ...state, token: null, user: null };
 };
-const reducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
       return authStart(state, action);
@@ -66,4 +79,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default authReducer;

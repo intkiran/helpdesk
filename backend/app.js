@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 var database = require("./database.js");
+let middleware = require("./config/middleware");
 
 const router = express.Router();
 //const route = require("./routes/route");
 const product = require("./routes/product.route"); // Imports routes for the products
-const users = require("./routes/user.route"); // Imports routes for the products
+const users = require("./routes/user.route"); // Imports routes for the users
+const auth = require("./routes/auth.route"); // Imports routes for the auth
 
 let port = 2000;
 const app = express();
@@ -43,7 +45,7 @@ app.use(function(req, res, next) {
   // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "X-Requested-With,content-type,Authorization"
   );
 
   // Set to true if you need the website to include cookies in the requests sent
@@ -59,7 +61,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //app.use("/", route);
 app.use("/products", product);
-app.use("/api/users", users);
+app.use("/api/users", middleware.checkToken, users);
+app.use("/api/auth", auth);
 
 app.listen(port, () => {
   console.log("router " + app);
@@ -79,7 +82,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  //  res.render("error");
+  res.json({
+    message: err.message,
+    error: err
+  });
 });
 
 process.on("uncaughtException", err => {

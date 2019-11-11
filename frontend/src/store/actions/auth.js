@@ -1,6 +1,8 @@
 import * as actionTypes from "./actionTypes";
 import { axiosInstance as axios } from "../../services/axiosInstance";
 import { UserService } from "../../services/";
+import { history } from "./../../utils/history";
+import setAuthorizationToken from "./../../utils/setAuthorizationToken";
 
 let firstTry = true;
 export const authStart = () => {
@@ -9,11 +11,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, user) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    idToken: token,
-    userId: userId
+    token: token,
+    user: user
   };
 };
 
@@ -44,6 +46,9 @@ export const auth = (email, password) => {
       .then(response => {
         console.log("Actions auth login success", response);
         dispatch(authSuccess(response.data.token, response.data));
+        setAuthorizationToken(response.data.token);
+
+        history.push("/home");
       })
       .catch(error => {
         console.log("Actions auth login error", error);
