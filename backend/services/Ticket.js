@@ -1,9 +1,10 @@
 const Ticket = require("../models/Ticket");
 const apiError = require("../controllers/apiError");
+const mongoose = require("mongoose");
 
 const getTicket = async id => {
   let existingTicket = null;
-  const ticket = await Ticket.findById(id, function(err, user) {
+  const ticket = await Ticket.findById(id, function(err, ticket) {
     if (err) throw new apiError("unable to find ticket.", 500);
     console.log("ticket", ticket);
     existingTicket = ticket;
@@ -25,7 +26,9 @@ const addTicket = async ticket => {
     priority: ticket.priority,
     status: ticket.status,
     subject: ticket.subject,
+    message: ticket.message,
     CrtdOn: ticket.CrtdOn,
+    tid: new mongoose.mongo.ObjectId(),
     ModOn: ticket.ModOn
   });
   let addedTicket = await newTicket.save();
@@ -41,6 +44,8 @@ const updateTicket = async ticket => {
     priority: ticket.priority,
     status: ticket.status,
     subject: ticket.subject,
+    tid: ticket.tid,
+    message: ticket.message,
     CrtdOn: ticket.CrtdOn,
     ModOn: ticket.ModOn
   });
@@ -50,8 +55,15 @@ const updateTicket = async ticket => {
     err,
     newUpdatedTicket
   ) {
-    if (err) throw new apiError("unable to updated ticket.", 500);
+    console.log("finalTicket", err, newUpdatedTicket);
+
+    if (err) {
+      console.log("error", err);
+      throw new apiError("unable to updated ticket.", 500);
+    }
+
     finalTicket = newUpdatedTicket;
+    console.log("finalTicket", newUpdatedTicket);
   });
 
   return finalTicket;

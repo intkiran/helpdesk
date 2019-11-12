@@ -5,17 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   newInsertedTickets: [],
-  newDeletedTickets: [],
-  newInsertedTickets: {}
-};
-const startUpdate = state => {
-  return {
-    ...state,
-    loading: false,
-    success: false,
-    tickets: [],
-    error: null
-  };
+  newDeletedTickets: []
 };
 const fetchTicketsStart = (state, action) => {
   return {

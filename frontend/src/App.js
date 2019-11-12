@@ -1,13 +1,6 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import {
-  Redirect,
-  Route,
-  Switch,
-  BrowserRouter as Router,
-  withRouter
-} from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import Auth from "./container/Auth";
 import Home from "./container/Dashboard";
 import Header from "./container/Header";
@@ -21,14 +14,9 @@ import UserContainer from "./container/User/UserContainer";
 import Logout from "./container/Auth/Logout";
 import TicketListContainer from "./container/Ticket/TicketListContainer";
 import TicketContainer from "./container/Ticket/TicketContainer";
+import TicketDetails from "./container/Ticket/TicketDetails";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    /* if (props.isAuthenticated) {
-      props.isLoggedIn();
-    } */
-  }
   componentDidUpdate(prevProps) {
     /*  if (
       this.props.location !== prevProps.location &&
@@ -54,8 +42,10 @@ class App extends Component {
           <Route exact path="/user" component={UserContainer} />
           <Route exact path="/user/:id" component={UserContainer} />
           <Route path="/tickets" component={TicketListContainer} />
+          <Route path="/tickets/details/:ticket" component={TicketDetails} />
+
           <Route exact path="/ticket" component={TicketContainer} />
-          <Route exact path="/ticket/:id" component={TicketContainer} />
+          <Route exact path="/ticket/:id" component={TicketDetails} />
           <Route exact path="/logout" component={Logout} />
 
           <Route path="/home" component={Home} />

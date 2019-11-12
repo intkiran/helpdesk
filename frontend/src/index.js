@@ -11,11 +11,12 @@ import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { setupInterceptors } from "./services/axiosInstance";
-import Spinner from "./components/spinner";
-import setAuthorizationToken from "./utils/setAuthorizationToken";
+import "./styles/global.scss";
+import "./styles/mixins.scss";
+import "./styles/variables.scss";
+
 import * as actions from "./store/actions/index";
 
-import * as serviceWorker from "./serviceWorker";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 export const persistor = persistStore(store);

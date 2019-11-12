@@ -40,6 +40,11 @@ const TicketSchema = new Schema(
       type: String,
       required: false
     },
+    tid: {
+      type: String,
+      required: false,
+      index: true
+    },
     CrtdOn: {
       type: Date
     },

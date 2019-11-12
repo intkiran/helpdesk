@@ -22,7 +22,6 @@ class TicketListContainer extends Component {
       <p className="text-center alert alert-info">Loading Tickets...</p>
     ) : (
       <>
-        <FilterForm />
         <TicketList tickets={this.props.tickets} onDelete={this.deleteTicket} />
       </>
     );
@@ -43,7 +42,7 @@ const mapStateToProps = state => {
     loading: state.tickets.loading,
     error: state.tickets.error
   };
-  console.log("  Kiran Ticket list container ", state);
+  console.log("  Kiran Ticket list container ", stateList);
 
   return stateList;
 };

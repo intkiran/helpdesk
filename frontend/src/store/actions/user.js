@@ -67,6 +67,7 @@ export const fetchUser = id => {
       .then(response => {
         console.log("Kiran Users api list call response", response);
         dispatch(fetchUserSuccess(response.data));
+        toastr.success("User Successfully retrieved");
       })
       .catch(err => {
         dispatch(fetchUserFail(err));
@@ -99,8 +100,8 @@ export const createUser = (data, sortBy) => {
     axios
       .post("/api/users/create", data)
       .then(response => {
-        dispatch(createUserSuccess(response.data));
         toastr.success("User Successfully created");
+        dispatch(createUserSuccess(response.data));
       })
       .catch(err => {
         dispatch(createUserFail(err));

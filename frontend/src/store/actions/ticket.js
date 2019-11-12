@@ -63,7 +63,7 @@ export const fetchTicket = id => {
     dispatch(fetchTicketFail()); */
 
     axios
-      .get("/api/ticket/" + id)
+      .get("/api/tickets/" + id)
       .then(response => {
         console.log("Kiran Tickets api list call response", response);
         dispatch(fetchTicketSuccess(response.data));
@@ -94,13 +94,14 @@ export const createTicketFail = error => {
 };
 
 export const createTicket = (data, sortBy) => {
+  debugger;
   return dispatch => {
     dispatch(createTicketStart());
     axios
       .post("/api/tickets/create", data)
       .then(response => {
-        dispatch(createTicketSuccess(response.data));
         toastr.success("Ticket Successfully created");
+        dispatch(createTicketSuccess(response.data));
       })
       .catch(err => {
         dispatch(createTicketFail(err));
@@ -128,6 +129,7 @@ export const updateTicketFail = error => {
 };
 
 export const updateTicket = (data, sortBy) => {
+  debugger;
   return dispatch => {
     dispatch(updateTicketStart());
     axios

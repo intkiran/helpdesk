@@ -23,7 +23,6 @@ router.post(
 );
 router.post(
   "/update",
-  updateTicket,
   controllerHandler(updateTicket, (req, res, next) => [req.body])
 );
 router.delete(

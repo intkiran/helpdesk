@@ -68,7 +68,7 @@ class Auth extends Component {
     console.log("kiran auth component from", from);*/
 
     /*     if (this.props.isAuthenticated) return <Redirect to={"/home"} />;
-     */ const { username, password, submitted, error } = this.state;
+     */ const { username, password, submitted } = this.state;
     let spinnerIcon = null;
     if (this.props.loading) {
       spinnerIcon = <Spinner />;
@@ -138,11 +138,6 @@ class Auth extends Component {
                         <Col xs="6">
                           <Button color="primary" className="px-4">
                             Login
-                          </Button>
-                        </Col>
-                        <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">
-                            Forgot password?
                           </Button>
                         </Col>
                       </Row>

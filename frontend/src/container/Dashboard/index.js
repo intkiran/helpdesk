@@ -22,7 +22,12 @@ class Dashboard extends Component {
     if (this.state.error.length) {
       errorMessage = <div>{this.state.error}</div>;
     }
-    return <div className="header">This is dashboard</div>;
+    return (
+      <div className="header">
+        This is dashboard
+        {errorMessage}
+      </div>
+    );
   }
 }
 

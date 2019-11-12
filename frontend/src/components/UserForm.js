@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
+import { history } from "./../utils/history";
+import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
+
 class UserForm extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +45,9 @@ class UserForm extends React.Component {
   UNSAFE_componentWillReceiveProps(ble) {
     this.setState(ble.user);
   }
-
+  goBack() {
+    history.push("/users");
+  }
   handleRolesChange = roles => {
     let value = roles.target.value;
     let name = roles.target.name;
@@ -59,92 +65,107 @@ class UserForm extends React.Component {
   };
 
   render() {
+    let userTitle = "New user";
+    if (this.state.username) {
+      userTitle = "Edit User - " + this.state.firstName;
+    }
     return (
-      <form>
-        <div className="form-group">
-          <label htmlFor="username">User Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            name="username"
-            placeholder="Username"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-            value={this.state.firstName}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="lastName"
-            name="lastName"
-            placeholder="First Name"
-            value={this.state.lastName}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">email</label>
-          <input
-            type="text"
-            className="form-control"
-            id="email"
-            name="email"
-            placeholder="email"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            className="form-control"
-            id="password"
-            name="password"
-            placeholder="Password"
-            defaultValue={this.state.password}
-            onChange={this.handleInputChange}
-          />
-        </div>
+      <form className="ticket-container">
+        <h5>{userTitle}</h5>
 
-        <div className="form-group">
-          <label htmlFor="roles">Role</label>
-          <select
-            className="form-control"
-            onChange={this.handleRolesChange}
-            name="roles"
-            id="roles"
+        <FormGroup className="col-6" row>
+          <Label sm={4}>User Name</Label>
+          <Col sm={6}>
+            <Input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup className="col-6" row>
+          <Label sm={4}>First Name</Label>
+          <Col sm={6}>
+            <Input
+              type="text"
+              id="firstName"
+              name="firstName"
+              placeholder="First Name"
+              value={this.state.firstName}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup className="col-6" row>
+          <Label sm={4}>Last Name</Label>
+          <Col sm={6}>
+            <Input
+              type="text"
+              className="form-control"
+              id="lastName"
+              name="lastName"
+              placeholder="Last Name"
+              value={this.state.lastName}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup className="col-6" row>
+          <Label sm={4}>Email</Label>
+          <Col sm={6}>
+            <Input
+              type="text"
+              className="form-control"
+              id="email"
+              name="email"
+              placeholder="email"
+              value={this.state.email}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup className="col-6" row>
+          <Label sm={4}>Email</Label>
+          <Col sm={6}>
+            <Input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              placeholder="Password"
+              defaultValue={this.state.password}
+              onChange={this.handleInputChange}
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup className="col-6" row>
+          <Label sm={4}>roles</Label>
+          <Col sm={6}>
+            <Input
+              type="select"
+              className="form-control"
+              onChange={this.handleRolesChange}
+              name="roles"
+              id="roles"
+            >
+              <option id="standard">Standard</option>
+              <option id="admin">Admin</option>
+            </Input>
+          </Col>
+        </FormGroup>
+        <div className="col-12 text-center">
+          <Button
+            className="center-block btn-success"
+            onClick={this.handleSubmit}
           >
-            <option id="standard">Standard</option>
-            <option id="admin">Admin</option>
-          </select>
-          only Values standard or admin
+            Submit
+          </Button>
+          <Link to="/users" className="btn btn-primary">
+            Back
+          </Link>
         </div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={this.handleSubmit}
-        >
-          Submit
-        </button>
-        <Link to="/users" className="btn btn-primary">
-          Back
-        </Link>
       </form>
     );
   }
@@ -154,4 +175,5 @@ UserForm.propTypes = {
   onSave: PropTypes.func.isRequired,
   user: PropTypes.object
 };
+
 export default UserForm;

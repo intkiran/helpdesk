@@ -12,15 +12,6 @@ export default class FilterForm extends React.Component {
   render() {
     return (
       <form>
-        <div className="form-group col-md-4">
-          <input
-            type="text"
-            className="form-control"
-            id="filter"
-            placeholder="Search"
-            onChange={this.handleFilterChange.bind(this)}
-          />
-        </div>
         <div className="col-md-2">
           <Link to="/user" className="btn btn-primary">
             <span className="fa fa-plus" aria-hidden="true"></span>

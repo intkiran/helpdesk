@@ -5,17 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   newInsertedUsers: [],
-  newDeletedUsers: [],
-  newInsertedUsers: {}
-};
-const startUpdate = state => {
-  return {
-    ...state,
-    loading: false,
-    success: false,
-    users: [],
-    error: null
-  };
+  newDeletedUsers: []
 };
 const fetchUsersStart = (state, action) => {
   return {
