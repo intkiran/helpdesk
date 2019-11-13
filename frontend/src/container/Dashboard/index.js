@@ -32,14 +32,12 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  const props = {
+  return {
     isAuthenticated: state.auth.token !== null,
     loading: state.auth.loading,
     user: state.auth.user,
     error: state.error
   };
-  console.log("kiran dashboard mapstateprops", props);
-  return props;
 };
 
 const mapDispatchToProps = dispatch => {
