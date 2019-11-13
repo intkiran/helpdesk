@@ -3,20 +3,18 @@ import TicketList from "./../../components/Ticket/TicketList";
 import { connect } from "react-redux";
 import * as actions from "./../../store/actions/index";
 class TicketListContainer extends Component {
+  
   constructor(props) {
     super(props);
-    console.log("Kiran List ticket Container component");
     this.deleteTicket = this.deleteTicket.bind(this);
-
     this.props.listTickets();
   }
+
   showNewAccountScreen() {
     this.setState({});
   }
 
   render() {
-    console.log("Kiran List ticket Container component");
-    console.log("kiran  ticket list", this.props.tickets);
     const result = this.props.loading ? (
       <p className="text-center alert alert-info">Loading Tickets...</p>
     ) : (
@@ -26,9 +24,8 @@ class TicketListContainer extends Component {
     );
     return <div className="tickets">{result}</div>;
   }
-  deleteTicket(id) {
-    console.log("  renuka delete ticket id  list container ", id);
 
+  deleteTicket(id) {
     if (window.confirm("Are you sure you want to delete this Ticket?")) {
       this.props.deleteTicket(id);
     }
@@ -36,21 +33,18 @@ class TicketListContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const stateList = {
+  return {
     tickets: state.tickets.tickets,
     loading: state.tickets.loading,
     error: state.tickets.error
   };
-  console.log("  Kiran Ticket list container ", stateList);
-
-  return stateList;
 };
+
 const mapDispatchToProps = dispatch => {
   const dd = {
     listTickets: () => dispatch(actions.fetchTickets()),
     deleteTicket: id => dispatch(actions.deleteTicket(id))
   };
-  console.log("renuka ticketlistcontainer ", dd);
   return dd;
 };
 

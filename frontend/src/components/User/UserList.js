@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 
 const UserList = ({ users, onDelete }) => {
-  console.log("Kiran userlist ", users, onDelete);
   return !users.length ? (
     <p className="alert alert-warning text-center">No Users found.</p>
   ) : (

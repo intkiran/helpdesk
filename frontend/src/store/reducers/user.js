@@ -18,8 +18,6 @@ const fetchUsersStart = (state, action) => {
 };
 
 const fetchUsersSuccess = (state, action) => {
-  console.log("Kiran user reducer success", state, action);
-
   return {
     ...state,
     error: null,

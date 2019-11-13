@@ -3,8 +3,7 @@ export {
   logout,
   authSuccess,
   setAuthenticationFromCache,
-  authFail,
-  isLoggedIn
+  authFail
 } from "./auth";
 export {
   fetchUsers,

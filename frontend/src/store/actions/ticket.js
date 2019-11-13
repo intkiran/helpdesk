@@ -28,7 +28,6 @@ export const fetchTickets = () => {
     axios
       .get("/api/tickets/")
       .then(response => {
-        console.log("Kiran Tickets api list call response", response);
         dispatch(fetchTicketsSuccess(response.data));
       })
       .catch(err => {
@@ -59,13 +58,9 @@ export const fetchTicketFail = error => {
 export const fetchTicket = id => {
   return dispatch => {
     dispatch(fetchTicketStart(id));
-    /*   dispatch(fetchTicketSuccess());
-    dispatch(fetchTicketFail()); */
-
     axios
       .get("/api/tickets/read/" + id)
       .then(response => {
-        console.log("Kiran Tickets api list call response", response);
         dispatch(fetchTicketSuccess(response.data));
       })
       .catch(err => {

@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, Form, FormGroup, Label, Col, Input } from "reactstrap";
-import { StatusTypes, CategoryTypes, PriorityTypes } from "../../utils/constants";
+import {
+  StatusTypes,
+  CategoryTypes,
+  PriorityTypes
+} from "../../utils/constants";
 import { history } from "../../utils/history";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -37,78 +41,34 @@ class TicketDetailsForm extends React.Component {
     this.setState({
       [name]: value
     });
-    console.log("ticket form ", this.state);
   }
   handleSubmit(event) {
     event.preventDefault();
-    console.log("ticket form submit ", this.state);
-
     this.props.onUpdateTicket(this.state);
   }
   handleCommentSubmit = newcomment => {
-    debugger;
-    console.log("ticket form submit ", this.state);
-    console.log("ticket form submit ", typeof newcomment);
-
     let newcomments = [...this.state.comments];
     newcomments.push(newcomment);
-    /*  this.setState(() => ({
-      comment: newcomments
-    })); */
     this.setState({ comments: newcomments }, () => {
       this.props.onCommentUpdate(this.state);
-
-      console.log("kiran new state", this.state);
     });
-
-    //
-    // this.setState({ comments: this.state.comments.concat(newcomment) });
-
-    /*  const comments = Object.assign({}, this.state.comments);
-
-    this.setState({ comments: Object.assign(comments, newcomment) });*/
-
-    /*  this.setState(
-      prevState => {
-        return {
-          comments: [...prevState.comments],
-          newComments
-        };
-      },
-      () => console.log("kiran new", this.state)
-    );
- */
-    /*   this.setState(prevState => ({
-      comments: [...prevState.comments, comments]
-    })); */
-    /*  this.setState(prevState => ({
-      comments: [...prevState.comments, comments]
-    })); 
-
-    this.setState({
-      comments: [...this.state.comments, ...comments]
-    });*/
   };
+
   componentDidMount() {
-    console.log("kiran ticket form", this.props.ticket);
     this.setState(this.props.ticket);
-    console.log("kiran ticket form1", this.state);
   }
+
   componentWillMount() {
-    console.log("kiran ticket form", this.props.ticket);
     this.setState(this.props.ticket);
-    console.log("kiran ticket form1", this.state);
   }
+
   UNSAFE_componentWillReceiveProps(ble) {
     this.setState(ble.ticket);
-    console.log("kiran ticket form1", this.state);
   }
 
   handlePriorityChange = priority => {
     let value = priority.target.value;
     let name = priority.target.name;
-
-    console.log("handlePriorityChange", priority.target.name);
     this.setState(
       prevState => {
         return {
@@ -116,9 +76,8 @@ class TicketDetailsForm extends React.Component {
           [name]: value
         };
       },
-      () => console.log("kiran new", this.state)
+      () => console.log("Updated state", this.state)
     );
-    console.log("kiran new", this.state);
   };
   closeTicket() {
     history.push("/tickets");
@@ -203,8 +162,6 @@ class TicketDetailsForm extends React.Component {
           </FormGroup>
 
           <FormGroup sm={12} row>
-            {/*             <CommentForm update={this.onCommentUpdate} user={this.props.user} />
-             */}{" "}
             <div sm={12} row className="comment-box">
               <CommentForm
                 data={this.props.comments}

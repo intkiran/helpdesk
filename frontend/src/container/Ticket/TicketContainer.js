@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-
 import { Redirect } from "react-router-dom";
 import TicketForm from "../../components/Ticket/TicketForm";
 
@@ -15,7 +14,6 @@ class TicketContainer extends Component {
     if (this.props.saved) {
       return <Redirect to="/" />;
     }
-
     return (
       <div>
         {this.props.loading && (
@@ -40,10 +38,6 @@ class TicketContainer extends Component {
       this.props.getTicketById(this.props.match.params.id);
     }
   };
-
-  componentWillUnmount = () => {
-    //this.props.newUser();
-  };
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -54,15 +48,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
-  const res = {
+  return {
     loading: state.tickets.loading,
     saved: state.tickets.saved,
     error: state.tickets.error,
     ticket: state.tickets.newInsertedTicketss,
     loggedUser: state.auth.user
   };
-  console.log("kiran book container", res);
-  return res;
 };
 
 export default connect(

@@ -17,10 +17,7 @@ import TicketContainer from "./container/Ticket/TicketContainer";
 import TicketDetails from "./container/Ticket/TicketDetails";
 
 class App extends Component {
-  componentDidUpdate(prevProps) {}
   render() {
-    let accessToken = localStorage.getItem("token");
-    console.log("kiran accessToken app.js ", accessToken);
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth} />
@@ -46,7 +43,6 @@ class App extends Component {
       );
     }
 
-    console.log("kiran routes", routes);
     return (
       <>
         <Header />
@@ -61,11 +57,11 @@ class App extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.token !== null
 });
+
 const mapDispatchToProps = dispatch => ({
   checkToken: (token, id) => dispatch(actions.auth(token, id)),
   setAuthenticationFromCache: () =>
-    dispatch(actions.setAuthenticationFromCache()),
-  isLoggedIn: () => dispatch(actions.isLoggedIn())
+    dispatch(actions.setAuthenticationFromCache())
 });
 
 export default withRouter(

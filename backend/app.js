@@ -24,8 +24,8 @@ app.use((request, response, next) => {
 
 var showRequestBody = function(req, res, next) {
   "use strict";
-  console.log(
-    "REQUEST BODY",
+  console.debug(
+    "Request Body",
     require("util").inspect(req.body, { depth: null })
   );
   next();
@@ -66,8 +66,6 @@ app.use("/api/tickets", middleware.checkToken, tickets);
 app.use("/api/auth", auth);
 
 app.listen(port, () => {
-  console.log("router " + app);
-
   console.log("Web server is up and running at " + port);
 });
 // catch 404 and forward to error handler

@@ -18,7 +18,6 @@ const authStart = (state, action) => {
 const setAuthFromCache = (state, action) => {
   let idToken = localStorage.getItem("token");
   let userObj = localStorage.getItem("user");
-  console.log("kiran setAuthFromCache", JSON.parse(userObj));
   return {
     ...state,
     token: idToken,
@@ -29,16 +28,8 @@ const setAuthFromCache = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
-  console.log("auth reducer success", state, action);
   localStorage.setItem("token", action.token);
   localStorage.setItem("user", JSON.stringify(action.user.user));
-  /* const result = Object.assign({}, state, {
-    token: action.token,
-    user: action.user,
-    error: null,
-    loading: false
-  }); */
-
   const result = {
     ...state,
     token: action.token,
@@ -46,13 +37,10 @@ const authSuccess = (state, action) => {
     error: null,
     loading: false
   };
-  console.log("auth reducer success result", result);
-
   return result;
 };
 
 const authFail = (state, action) => {
-  console.log("auth reducer fail", state, action);
   localStorage.removeItem("token");
   return { ...state, error: action.error.message, loading: false, token: null };
 };

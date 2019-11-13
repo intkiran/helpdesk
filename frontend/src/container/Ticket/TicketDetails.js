@@ -11,38 +11,20 @@ class TicketDetails extends Component {
     this.onUpdateTicket = this.onUpdateTicket.bind(this);
     this.onCommentUpdate = this.onCommentUpdate.bind(this);
   }
+
   closeTicket = () => {
     history.goBack();
   };
+
   onUpdateTicket(ticket) {
     this.props.updateTicket(ticket);
   }
+
   onCommentUpdate(ticket) {
     debugger;
     this.props.updateTicket(ticket);
   }
-  /*   onSubmit = () => {
-    const data = {
-      status: formData.status,
-      id: _id,
-      uid,
-      comments
-    };
-    this.prop.updateTicket(data, this.props.history);
-  };
 
-  onCommentUpdate = updateComments => {
-    const data = {
-      status,
-      id: _id,
-      uid,
-      comments: updateComments
-    };
-    this.prop.updateComment(data);
-  };
-  getFormData = (value, field) => {
-    setFormData(prevState => ({ ...prevState, [field]: value }));
-  }; */
   render() {
     return (
       <div>
@@ -56,8 +38,6 @@ class TicketDetails extends Component {
           onCommentUpdate={this.onCommentUpdate}
           onUpdateTicket={this.onUpdateTicket}
         />
-        {/*         <CommentContainer update={this.onCommentUpdate} />
-         */}
       </div>
     );
   }
@@ -68,18 +48,17 @@ class TicketDetails extends Component {
     }
   };
 }
+
 const mapStateToProps = state => {
-  const stateList = {
+  return {
     ticket: state.tickets.newInsertedTickets,
     loading: state.tickets.loading,
     error: state.tickets.error,
     role: state.auth.user.roles,
     user: state.auth.user
   };
-  console.log("  renuka Ticket list container ", stateList);
-
-  return stateList;
 };
+
 const mapDispatchToProps = dispatch => {
   const dd = {
     updateTicket: data => dispatch(actions.updateTicket(data)),
@@ -88,7 +67,6 @@ const mapDispatchToProps = dispatch => {
     newTicket: () => dispatch(actions.newTicket()),
     getTicketById: id => dispatch(actions.fetchTicket(id))
   };
-  console.log("renuka ticketlistcontainer ", dd);
   return dd;
 };
 

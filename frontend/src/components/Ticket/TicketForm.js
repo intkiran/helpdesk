@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
-import { StatusTypes, CategoryTypes, PriorityTypes } from "../../utils/constants";
+import {
+  StatusTypes,
+  CategoryTypes,
+  PriorityTypes
+} from "../../utils/constants";
 
 class TicketForm extends React.Component {
   constructor(props) {
@@ -23,6 +27,7 @@ class TicketForm extends React.Component {
       ModOn: ""
     };
   }
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -31,19 +36,17 @@ class TicketForm extends React.Component {
     this.setState({
       [name]: value
     });
-    console.log("ticket form ", this.state);
   }
+
   handleSubmit(event) {
     event.preventDefault();
-    console.log("ticket form submit ", this.state);
-
     this.props.onSave(this.state);
   }
+
   componentDidMount() {
-    console.log("kiran ticket form", this.props.ticket);
     this.setState(this.props.ticket);
-    console.log("kiran ticket form1", this.state);
   }
+
   UNSAFE_componentWillReceiveProps(ble) {
     this.setState(ble.ticket);
   }
@@ -72,7 +75,7 @@ class TicketForm extends React.Component {
           [name]: newValue
         };
       },
-      () => console.log("kiran new", this.state)
+      () => console.log("updated state", this.state)
     );
   };
 

@@ -17,9 +17,6 @@ export const setupInterceptors = (store, persistor) => {
       //If the header does not contain the token and the url not public, redirect to login
       //var accessToken = getAccessTokenFromCookies();
       let token = localStorage.getItem("token");
-      console.log("configuration", config);
-      console.log("Kiran ", token);
-
       //if token is found add it to the header
       if (token) {
         if (config.method !== "OPTIONS") {
@@ -39,9 +36,7 @@ export const setupInterceptors = (store, persistor) => {
       return response;
     },
     error => {
-      console.log("Erro axios instancer", error);
       if (errorsTypes.AUTHENTICATIONERROR === error.status) {
-        console.error("unauthenticated user");
         store.dispatch(actions.logout());
       }
       return Promise.reject(error); // transform response.response -> response

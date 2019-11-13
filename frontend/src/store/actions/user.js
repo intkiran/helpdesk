@@ -28,7 +28,6 @@ export const fetchUsers = () => {
     axios
       .get("/api/users/")
       .then(response => {
-        console.log("Kiran Users api list call response", response);
         dispatch(fetchUsersSuccess(response.data));
       })
       .catch(err => {
@@ -65,7 +64,6 @@ export const fetchUser = id => {
     axios
       .get("/api/users/" + id)
       .then(response => {
-        console.log("Kiran Users api list call response", response);
         dispatch(fetchUserSuccess(response.data));
         toastr.success("User Successfully retrieved");
       })

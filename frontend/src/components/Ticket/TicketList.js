@@ -5,8 +5,6 @@ import { PriorityTypes, StatusTypes } from "../../utils/constants";
 import { Table } from "reactstrap";
 
 const TicketList = ({ tickets, onDelete }) => {
-  console.log("Kiran ticketlist ", tickets, onDelete);
-
   return !tickets.length ? (
     <p className="alert alert-warning text-center">No tickets found.</p>
   ) : (

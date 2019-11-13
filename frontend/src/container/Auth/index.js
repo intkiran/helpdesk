@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "../../components/spinner";
-
+import toastr from "toastr";
 import {
   Button,
   Card,
@@ -54,21 +54,12 @@ class Auth extends Component {
     if (nextProps.isAuthenticated) {
       this.props.history.push("/home");
     } else if (nextProps.error) {
-      //toastr.error(nextProps.auth.error);
+      toastr.error(nextProps.auth.error);
     }
   }
 
-  getToHome() {
-    // history.push("/home");
-    //this.props.history.push("/home");
-  }
   render() {
-    console.log("Kiran AuthComponent", this.props.isAuthenticated);
-    /*     let { from } = this.props.location.state || { from: { pathname: "/home" } };
-    console.log("kiran auth component from", from);*/
-
-    /*     if (this.props.isAuthenticated) return <Redirect to={"/home"} />;
-     */ const { username, password, submitted } = this.state;
+    const { username, password, submitted } = this.state;
     let spinnerIcon = null;
     if (this.props.loading) {
       spinnerIcon = <Spinner />;
@@ -156,13 +147,11 @@ class Auth extends Component {
   }
 }
 const mapStateToProps = state => {
-  const props = {
+  return {
     loading: state.auth.loading,
     error: state.auth.error,
     isAuthenticated: state.auth.token !== null
   };
-  console.log("kiran auth mapstateprops", props);
-  return props;
 };
 
 const mapDispatchToProps = dispatch => {

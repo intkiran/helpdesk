@@ -21,7 +21,6 @@ class UserContainer extends Component {
         {this.props.loading && (
           <p className="text-center alert alert-info">Loading ...</p>
         )}
-
         <UserForm user={this.props.user} onSave={this.save} />
       </div>
     );
@@ -40,10 +39,6 @@ class UserContainer extends Component {
       this.props.getUserById(this.props.match.params.id);
     }
   };
-
-  componentWillUnmount = () => {
-    //this.props.newUser();
-  };
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -61,7 +56,6 @@ const mapStateToProps = state => {
     user: state.users.newInsertedUsers,
     loggedUser: state.auth.user
   };
-  console.log("kiran book container", res);
   return res;
 };
 

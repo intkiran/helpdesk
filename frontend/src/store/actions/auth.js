@@ -1,5 +1,4 @@
 import * as actionTypes from "./actionTypes";
-import { axiosInstance as axios } from "../../services/axiosInstance";
 import { UserService } from "../../services/";
 import { history } from "./../../utils/history";
 import setAuthorizationToken from "./../../utils/setAuthorizationToken";
@@ -43,11 +42,9 @@ export const auth = (email, password) => {
       username: email,
       password: password
     };
-    console.log("Actions auth login payload", payload);
 
     UserService.login(payload)
       .then(response => {
-        console.log("Actions auth login success", response);
         dispatch(authSuccess(response.data.token, response.data));
         setAuthorizationToken(response.data.token);
         toastr.success("User Successfully logged");
@@ -55,54 +52,17 @@ export const auth = (email, password) => {
         history.push("/home");
       })
       .catch(error => {
-        console.log("Actions auth login error", error);
-
         if (firstTry) {
           firstTry = false;
           dispatch(auth(email, password));
         }
         dispatch(authFail(error));
       });
-
-    /* try {
-      const response = await UserService.login(payload);
-      console.log("Actions auth login success", response);
-    } catch (error) {
-      console.log("Actions auth login error", error);
-    }*/
-    /*  axios
-      .post("/api/users/login", authData)
-      .then(response => {
-        console.log(response);
-        dispatch(
-          authSuccess(response.headers.authorization, response.data.localId)
-        );
-      })
-      .catch(err => {
-        if (firstTry) {
-          firstTry = false;
-          dispatch(auth(email, password));
-        }
-        dispatch(authFail(err));
-      }); */
   };
 };
 
 export const setAuthenticationFromCache = () => {
   return {
     type: actionTypes.SET_AUTHENTICATION_FROM_CACHE
-  };
-};
-
-export const isLoggedIn = () => {
-  return dispatch => {
-    axios
-      .get("/api/is-loggedin")
-      .then(response => {
-        console.log(response);
-      })
-      .catch(() => {
-        dispatch(logout());
-      });
   };
 };

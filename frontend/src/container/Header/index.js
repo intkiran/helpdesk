@@ -13,12 +13,7 @@ class Header extends Component {
   logout = event => {
     this.props.logout();
   };
-  componentDidMount() {
-    console.log("kiran header didmount", this.props.isAuthenticated);
-    /*   if (this.props.isAuthenticated) {
-      this.props.history.push("/home");
-    } */
-  }
+  componentDidMount() {}
   logout(event) {
     event.preventDefault();
     this.props.actions.logout();
@@ -27,12 +22,10 @@ class Header extends Component {
 
   render() {
     const currentUser = this.props.currentUser ? this.props.currentUser : null;
-    console.log("kiran auth current user", currentUser);
     let link;
     let role = null;
     if (currentUser) role = currentUser.roles;
 
-    console.log("kiran auth role", role);
     const userLinks = (
       <>
         <Nav className="mr-auto">
@@ -89,15 +82,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  const result = {
+  return {
     isAuthenticated: state.auth.token !== null,
     currentUser: state.auth.user,
     auth: state.auth
   };
-  console.log("kiran header mapstateprops", result);
-  return result;
 };
-
 export default withRouter(
   connect(
     mapStateToProps,

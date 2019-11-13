@@ -9,10 +9,8 @@ export const UserService = {
 async function login(payload) {
   try {
     const response = await axios.post("/api/auth/login", payload);
-    console.log("user service login success", response);
     return response;
   } catch (error) {
-    console.log("user service login error", error.response);
     throw error.response.data.error;
   }
 }

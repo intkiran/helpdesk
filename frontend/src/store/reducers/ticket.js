@@ -18,8 +18,6 @@ const fetchTicketsStart = (state, action) => {
 };
 
 const fetchTicketsSuccess = (state, action) => {
-  console.log("Kiran ticket reducer success", state, action);
-
   return {
     ...state,
     error: null,

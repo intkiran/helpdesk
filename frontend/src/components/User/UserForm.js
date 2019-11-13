@@ -25,22 +25,16 @@ class UserForm extends React.Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
-    console.log("user form ", this.state);
   }
   handleSubmit(event) {
     event.preventDefault();
-    console.log("user form submit ", this.state);
-
     this.props.onSave(this.state);
   }
   componentDidMount() {
-    console.log("kiran user form", this.props.user);
     this.setState(this.props.user);
-    console.log("kiran user form1", this.state);
   }
   UNSAFE_componentWillReceiveProps(ble) {
     this.setState(ble.user);
@@ -51,8 +45,6 @@ class UserForm extends React.Component {
   handleRolesChange = roles => {
     let value = roles.target.value;
     let name = roles.target.name;
-
-    console.log("handleRolesChange", roles.target.name);
     this.setState(
       prevState => {
         return {
@@ -60,7 +52,7 @@ class UserForm extends React.Component {
           [name]: value
         };
       },
-      () => console.log("kiran new", this.state)
+      () => console.log("Updated State ", this.state)
     );
   };
 

@@ -6,10 +6,8 @@ const getTicket = async id => {
   let existingTicket = null;
   const ticket = await Ticket.findById(id, function(err, ticket) {
     if (err) throw new apiError("unable to find ticket.", 500);
-    console.log("ticket", ticket);
     existingTicket = ticket;
   });
-
   return existingTicket;
 };
 
@@ -18,7 +16,6 @@ const getAllTickets = async () => {
 };
 
 const addTicket = async ticket => {
-  console.log("kiran babu", ticket);
   let newTicket = new Ticket({
     fullName: ticket.fullName,
     email: ticket.email,
@@ -49,35 +46,27 @@ const updateTicket = async ticket => {
     ModOn: ticket.ModOn
   });
   let finalTicket = null;
-
   Ticket.updateOne({ _id: ticket._id }, { $set: ticket }, function(
     err,
     newUpdatedTicket
   ) {
-    console.log("finalTicket", err, newUpdatedTicket);
-
     if (err) {
-      console.log("error", err);
       throw new apiError("unable to updated ticket.", 500);
     }
-
     finalTicket = newUpdatedTicket;
-    console.log("finalTicket", newUpdatedTicket);
   });
-
   return finalTicket;
 };
+
 const deleteTicket = async id => {
-  console.log("kiran babu", id);
   let deleteTicket = null;
   await Ticket.findByIdAndDelete(id, (err, ticket) => {
     if (err) throw new apiError("unable to delete ticket.", 500);
-    console.log("ticket", ticket);
     deleteTicket = ticket;
   });
-
   return deleteTicket;
 };
+
 module.exports = {
   getTicket,
   getAllTickets,

@@ -35,7 +35,6 @@ const UserSchema = new mongoose.Schema(
 );
 UserSchema.pre("save", function(next) {
   var user = this;
-  console.log("Saving User", next);
   //do password hash only when password is changed or new
   if (!user.isModified("password")) next();
   //Generate password salt
