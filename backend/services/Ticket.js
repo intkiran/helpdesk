@@ -36,7 +36,6 @@ const addTicket = async ticket => {
 };
 
 const updateTicket = async ticket => {
-  console.log("kiran babu", ticket);
   let newTicket = new Ticket({
     fullName: ticket.fullName,
     email: ticket.email,

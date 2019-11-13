@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { PriorityTypes, StatusTypes } from "../utils/constants";
+import { PriorityTypes, StatusTypes } from "../../utils/constants";
 import { Table } from "reactstrap";
 
 const TicketList = ({ tickets, onDelete }) => {

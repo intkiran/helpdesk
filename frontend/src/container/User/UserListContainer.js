@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserList from "./../../components/UserList";
+import UserList from "./../../components/User/UserList";
 import { connect } from "react-redux";
 import * as actions from "./../../store/actions/index";
 import FilterForm from "./../../components/Filter";

@@ -36,25 +36,25 @@ const TicketSchema = new Schema(
       type: Array,
       required: true
     },
-    message: {
+    description: {
       type: String,
-      required: false
+      required: true
     },
     tid: {
       type: String,
       required: false,
       index: true
     },
-    CrtdOn: {
+    createdDate: {
       type: Date
     },
-    ModOn: {
+    modifiedDate: {
       type: Date
     }
   },
   {
     autoIndex: false,
-    timestamps: { createdAt: "CrtdOn", updatedAt: "ModOn" }
+    timestamps: { createdAt: "createdDate", updatedAt: "modifiedDate" }
   }
 );
 

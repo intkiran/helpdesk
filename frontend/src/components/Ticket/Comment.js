@@ -9,9 +9,9 @@ const Comment = props => {
         <div className="col-sm-12">
           <div className="panel panel-default">
             <div className="panel-heading">
-              <strong>{name}</strong>{" "}
+              <strong>{name} </strong>
               <span className="text-muted">
-                commented {moment(date, "YYYYMMDD").fromNow()}
+                commented {moment(date, "YYYYMMDDHHSS").fromNow()}
               </span>
             </div>
             <div className="panel-body">{text}</div>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
 import { Redirect } from "react-router-dom";
-import TicketForm from "../../components/TicketForm";
+import TicketForm from "../../components/Ticket/TicketForm";
 
 class TicketContainer extends Component {
   constructor(props) {

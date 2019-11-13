@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Button, Form, FormGroup, Label, Col, Input } from "reactstrap";
-import { StatusTypes, CategoryTypes, PriorityTypes } from "../utils/constants";
-import { history } from "./../utils/history";
+import { StatusTypes, CategoryTypes, PriorityTypes } from "../../utils/constants";
+import { history } from "../../utils/history";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 import { Link } from "react-router-dom";
@@ -174,9 +174,9 @@ class TicketDetailsForm extends React.Component {
             </Col>
             <Col sm={5}>{this.state.fullName}</Col>
             <Col sm={1}>
-              <Label>Date</Label>
+              <Label>Date </Label>
             </Col>
-            <Col sm={5}>{this.state.CrtdOn}</Col>
+            <Col sm={5}>{this.state.createdDate}</Col>
           </FormGroup>
 
           <FormGroup sm={12} row>
@@ -197,9 +197,9 @@ class TicketDetailsForm extends React.Component {
             <Col sm={5}>{this.state.subject}</Col>
 
             <Col sm={1}>
-              <Label>Message</Label>
+              <Label>Description</Label>
             </Col>
-            <Col sm={5}>{this.state.message}</Col>
+            <Col sm={5}>{this.state.description}</Col>
           </FormGroup>
 
           <FormGroup sm={12} row>

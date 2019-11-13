@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import Auth from "./container/Auth";
 import Home from "./container/Dashboard";
 import Header from "./container/Header";
-import Footer from "./components/footer";
+import Footer from "./components/Footer";
 import UserListContainer from "./container/User/UserListContainer";
 
 import * as actions from "./store/actions";
@@ -17,14 +17,7 @@ import TicketContainer from "./container/Ticket/TicketContainer";
 import TicketDetails from "./container/Ticket/TicketDetails";
 
 class App extends Component {
-  componentDidUpdate(prevProps) {
-    /*  if (
-      this.props.location !== prevProps.location &&
-      this.props.isAuthenticated
-    ) {
-      this.props.isLoggedIn();
-    } */
-  }
+  componentDidUpdate(prevProps) {}
   render() {
     let accessToken = localStorage.getItem("token");
     console.log("kiran accessToken app.js ", accessToken);

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { history } from "./../utils/history";
+import { history } from "../../utils/history";
 import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
 
 class UserForm extends React.Component {
@@ -70,7 +70,7 @@ class UserForm extends React.Component {
       userTitle = "Edit User - " + this.state.firstName;
     }
     return (
-      <form className="ticket-container">
+      <Form className="ticket-container">
         <h5>{userTitle}</h5>
 
         <FormGroup className="col-6" row>
@@ -166,7 +166,7 @@ class UserForm extends React.Component {
             Back
           </Link>
         </div>
-      </form>
+      </Form>
     );
   }
 }

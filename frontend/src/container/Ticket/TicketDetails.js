@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { history } from "./../../utils/history";
 import { connect } from "react-redux";
 import * as actions from "./../../store/actions/index";
-import TicketDetailsForm from "./../../components/TicketDetailsForm";
+import TicketDetailsForm from "./../../components/Ticket/TicketDetailsForm";
 import "./styles.scss";
 
 class TicketDetails extends Component {

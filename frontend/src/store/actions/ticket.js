@@ -63,7 +63,7 @@ export const fetchTicket = id => {
     dispatch(fetchTicketFail()); */
 
     axios
-      .get("/api/tickets/" + id)
+      .get("/api/tickets/read/" + id)
       .then(response => {
         console.log("Kiran Tickets api list call response", response);
         dispatch(fetchTicketSuccess(response.data));

@@ -24,7 +24,7 @@ const defaultConfig = {
    */
   mongo: {
     seed: true,
-    uri: "mongodb://localhost:27017/tm-es-dev",
+    uri: "mongodb://localhost:27017/helpdesk",
     options: {
       db: {
         safe: true
@@ -47,7 +47,7 @@ const environmentConfigs = {
   development: {
     mongo: {
       seed: false,
-      uri: process.env.MONGO_URI || "mongodb://localhost:27017/tm-new-es7"
+      uri: process.env.MONGO_URI || "mongodb://localhost:27017/helpdesk"
     },
     security: {
       saltRounds: 4
@@ -57,7 +57,7 @@ const environmentConfigs = {
   test: {
     port: 5678,
     mongo: {
-      uri: process.env.MONGO_URI || "mongodb://localhost/tm-test-es7"
+      uri: process.env.MONGO_URI || "mongodb://localhost/helpdesk-prod"
     },
     security: {
       saltRounds: 4

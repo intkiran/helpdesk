@@ -8,12 +8,10 @@ const {
   deleteUser
 } = require("../controllers/User");
 const express = require("express");
-console.log("Kiran CONTROL HANDLER", controllerHandler);
-console.log("Kiran CONTROL HANDLER1", getUser);
 
 const router = express.Router();
 router.get(
-  "/:id",
+  "/read/:id",
   controllerHandler(getUser, (req, res, next) => [req.params.id])
 );
 router.get("/", controllerHandler(getAllUsers, (req, res, next) => []));

@@ -2,6 +2,7 @@
 var mongoose = require("mongoose");
 path = require("path");
 const express = require("express");
+const Constants = require("./config/Constants");
 
 // Build the connection string
 var dbURI = "mongodb://localhost:27017/helpdesk";
@@ -9,8 +10,11 @@ var dbURI = "mongodb://localhost:27017/helpdesk";
 // Create the database connection
 //see: http://stackoverflow.com/a/26164828
 var connectionWithRetry = () => {
+  console.log("process.env.NODE_ENV", Constants.mongo.uri);
+  console.log("process.env.NODE_ENV", Constants);
+
   return mongoose.connect(
-    dbURI,
+    Constants.mongo.uri,
     { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true },
     error => {
       if (error) {

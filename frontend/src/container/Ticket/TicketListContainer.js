@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import TicketList from "./../../components/TicketList";
+import TicketList from "./../../components/Ticket/TicketList";
 import { connect } from "react-redux";
 import * as actions from "./../../store/actions/index";
-import FilterForm from "./../../components/Filter";
 class TicketListContainer extends Component {
   constructor(props) {
     super(props);

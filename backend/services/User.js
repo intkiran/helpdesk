@@ -44,7 +44,6 @@ const addUser = async user => {
 };
 
 const updateUser = async user => {
-  console.log("kiran babu", user);
   let newUser = new User({
     firstName: user.firstName,
     lastName: user.lastName,

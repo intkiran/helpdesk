@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
-import CommentForm from "../../components/CommentForm";
-import CommentList from "../../components/CommentList";
+import CommentForm from "../../components/Ticket/CommentForm";
+import CommentList from "../../components/Ticket/CommentList";
 
 class CommentContainer extends Component {
   constructor(props) {

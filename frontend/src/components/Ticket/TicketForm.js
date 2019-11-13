@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
-import { StatusTypes, CategoryTypes, PriorityTypes } from "../utils/constants";
+import { StatusTypes, CategoryTypes, PriorityTypes } from "../../utils/constants";
 
 class TicketForm extends React.Component {
   constructor(props) {
@@ -176,14 +176,14 @@ class TicketForm extends React.Component {
           </Col>
         </FormGroup>
         <FormGroup className="col-6" row>
-          <Label sm={4}>message</Label>
+          <Label sm={4}>description</Label>
           <Col sm={6}>
             <Input
               type="textarea"
-              id="message"
-              name="message"
-              placeholder="message"
-              defaultValue={this.state.message}
+              id="description"
+              name="description"
+              placeholder="description"
+              defaultValue={this.state.description}
               onChange={this.handleInputChange}
             />
           </Col>

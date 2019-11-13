@@ -12,10 +12,10 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
     console.log("boundParams ", boundParams);
 
     const result = await promise(...boundParams);
-    console.log("result ", result);
+    console.debug("controllerHandler result ", result);
     return res.json(result);
   } catch (error) {
-    console.log("kiran", error);
+    console.debug("controllerHandler error", error);
     if (error instanceof apiError) {
       return res.status(error.status).json({ error });
     }

@@ -8,12 +8,10 @@ const {
   deleteTicket
 } = require("../controllers/Ticket");
 const express = require("express");
-console.log("Kiran CONTROL HANDLER", controllerHandler);
-console.log("Kiran CONTROL HANDLER1", getTicket);
 
 const router = express.Router();
 router.get(
-  "/:id",
+  "/read/:id",
   controllerHandler(getTicket, (req, res, next) => [req.params.id])
 );
 router.get("/", controllerHandler(getAllTickets, (req, res, next) => []));
